@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { userRegisterAction } from "../../Redux/Actions/User";
+import { Link } from "react-router-dom";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -22,7 +23,7 @@ const Register = () => {
         <h1>{error}</h1>
       ) : (
         <div className="bg-white h-screen flex ">
-          <div className="w-[30rem] h-auto m-auto">
+          <div className="w-[30rem] h-auto m-auto p-5 lg:p-1">
             <form
               action=""
               className="flex flex-col space-y-6"
@@ -77,6 +78,14 @@ const Register = () => {
                 >
                   Submit
                 </button>
+                <Link to="/login">
+                  <button
+                    type="submit"
+                    className="text-zinc-500 cursor-pointer"
+                  >
+                    or, Login
+                  </button>
+                </Link>
               </div>
             </form>
           </div>

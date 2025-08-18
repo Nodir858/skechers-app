@@ -19,7 +19,7 @@ const Products = () => {
           <h1>{error}</h1>
         ) : (
           <div>
-            <h1>Flash Sale</h1>
+            <h1 className="text-center font-bold text-3xl m-5">Flash Sale</h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10  max-w-[80rem] m-auto">
               {products.map((item, index) => (
                 <div className="rounded-2xl" key={index}>

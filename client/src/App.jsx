@@ -12,6 +12,8 @@ import Login from "./pages/auth/Login.jsx";
 import Register from "./pages/auth/Register.jsx";
 import { useSelector } from "react-redux";
 import PlaceOrder from "./pages/PlaceOrder.jsx";
+import Footer from "./common/Footer.jsx";
+import OrderHistory from "./pages/OrderHistory.jsx";
 function App() {
   const { userInfo } = useSelector((state) => state.auth);
   return (
@@ -34,7 +36,12 @@ function App() {
           }
         ></Route>
         <Route path="/placeorder" element={<PlaceOrder></PlaceOrder>}></Route>
+        <Route
+          path="/order-history"
+          element={<OrderHistory></OrderHistory>}
+        ></Route>
       </Routes>
+      <Footer></Footer>
     </>
   );
 }

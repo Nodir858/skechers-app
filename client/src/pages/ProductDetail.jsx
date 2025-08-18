@@ -26,10 +26,10 @@ const ProductDetail = () => {
         ) : error ? (
           <h1>{error}</h1>
         ) : (
-          <article className="max-w-[60rem] h-auto m-auto flex ">
+          <article className="max-w-[60rem] h-auto m-auto lg:flex ">
             <div className="mr-3">
               <img
-                className="h-[30rem] w-[90rem] rounded-2xl"
+                className="m-auto w-[20rem] md:h-[25rem] md:w-[25rem] lg:h-[30rem] lg:w-[90rem] rounded-2xl"
                 src={product.image}
                 alt=""
               />
@@ -48,8 +48,8 @@ const ProductDetail = () => {
                 </p>
               </div>
               {/* Colors and Quantity */}
-              <div className="bg-amber-500 w-61 flex justify-between mb-5 font-sans">
-                <div className="border-1 flex  items-center">
+              <div className=" w-61 flex justify-between mb-5 font-sans">
+                <div className=" flex  items-center">
                   <span className="text-base">Color</span>
                   <div className="w-20 flex justify-between">
                     <button className="bg-white rounded-full h-6 w-6 border-1 border-slate-500"></button>

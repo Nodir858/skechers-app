@@ -41,25 +41,29 @@ const Navbar = () => {
   );
   return (
     <>
-      <nav className="w-full lg:w-3/4 bg-red-500 xl:bg-amber-200 lg:m-auto">
+      <nav className="w-full lg:w-3/4  lg:m-auto">
         <div className="main-container">
-          <a className="flex items-center">
+          <Link to="/" className="flex items-center">
             <AiOutlineProduct className="text-3xl" />
             <span className="text-xl ml-2">Skechers</span>
-          </a>
+          </Link>
           {/*Menu Section */}
           <div className="hidden w-1/2 sm:flex text-center justify-center items-center">
             <li className="flex space-x-5 list-none flex-wrap list-section">
-              <ul>Home</ul>
+              <Link to="/">
+                <ul>Home</ul>
+              </Link>
               <ul>About</ul>
               <ul>Services</ul>
               <ul>Contact</ul>
             </li>
           </div>
           {!userInfo ? (
-            <div className="sm:visible text-xl font-bold get-started-text">
-              <button>Get started</button>
-            </div>
+            <Link to="/register">
+              <div className="sm:visible text-xl font-bold get-started-text">
+                <button>Get started</button>
+              </div>
+            </Link>
           ) : (
             // <div>
             //   <button>Logout</button>
@@ -84,9 +88,11 @@ const Navbar = () => {
                 </div>
               </div>
               <Link onClick={toggleSidebar}>
-                <div className="bg-blue-500 w-full flex justify-center items-center text-2xl cursor-pointer relative">
+                <div className=" w-9  h-full flex justify-center items-center text-2xl cursor-pointer relative">
                   <FaShoppingCart />
-                  <span className="absolute text-white">{qty}</span>
+                  <div className="absolute text-fuchsia-500 top-[-5px] right-[-5px] font-bold">
+                    <span>{qty}</span>
+                  </div>
                 </div>
               </Link>
             </div>
@@ -108,9 +114,11 @@ function DropdownItem({ logOutHandler }) {
   return (
     <>
       <li className="dropDownItem">
-        <p className="cursor-pointer hover:bg-neutral-400 duration-300 rounded-t-xl px-2 py-1">
-          Profile
-        </p>
+        <Link to="/order-history">
+          <p className="cursor-pointer text-base hover:bg-neutral-400 duration-300 rounded-t-xl px-2 py-1">
+            Order-History
+          </p>
+        </Link>
         <p
           className="cursor-pointer hover:bg-neutral-400 duration-300 rounded-b-xl px-2 py-1"
           onClick={logOutHandler}

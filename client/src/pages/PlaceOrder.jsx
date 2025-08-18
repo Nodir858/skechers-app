@@ -4,12 +4,13 @@ import { FaTimes } from "react-icons/fa";
 import { addToCartAction } from "../Redux/Actions/Cart";
 import { useState } from "react";
 import { removeFromCartAction } from "../Redux/Actions/Cart";
+import { cartSaveShippingAddressAction } from "../Redux/Actions/Cart";
+import { orderAction } from "../Redux/Actions/Order";
 const PlaceOrder = () => {
-  const { cartItems } = useSelector((state) => state.cart);
+  const { cartItems, shippingAddress } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-  const productRed = useSelector((state) => state.productRed);
+  //const productRed = useSelector((state) => state.productRed);
   //const { loading, error, product = {} } = productRed;
-
   const removeFromCart = (id) => {
     dispatch(removeFromCartAction(id));
   };
@@ -31,10 +32,37 @@ const PlaceOrder = () => {
     Number(taxPrice) +
     Number(shippingPrice)
   ).toFixed(2);
+
+  //shipping address form data
+  const [address, setAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [postalCode, setpostalCode] = useState("");
+  const [country, setCountry] = useState("");
+  const saveShippingAddress = () => {
+    dispatch(
+      cartSaveShippingAddressAction({ address, city, postalCode, country })
+    );
+    dispatch(
+      orderAction({
+        orderItems: cartItems,
+        shippingAddress: {
+          address,
+          city,
+          postalCode,
+          country,
+        },
+        paymentMethod: subtotal,
+        itemsPrice: subtotal,
+        taxPrice,
+        shippingPrice,
+        totalPrice: total,
+      })
+    );
+  };
   return (
-    <article className="h-screen flex justify-center items-center space-x-[10rem]">
-      <section className=" min-w-[40rem]">
-        <div>
+    <article className="lg:h-screen m-5 flex-none lg:flex lg:justify-center space-x-[10rem] space-y-10 mb-10">
+      <section className="w-full lg:w-auto  lg:min-w-[40rem]  ">
+        <div className="">
           <div className="mb-5">
             <h1>Order summary</h1>
           </div>
@@ -42,15 +70,15 @@ const PlaceOrder = () => {
             {cartItems.map((item, key) => (
               <div
                 key={key}
-                className="flex justify-around mb-2 font-medium shadow-md p-1"
+                className=" sm:flex sm:justify-around mb-2 font-medium shadow-md p-1"
               >
                 <div className="">
                   <img
                     src={item.image}
                     alt="item"
-                    height={128}
-                    width={128}
-                    className="rounded-xl"
+                    // height={128}
+                    // width={128}
+                    className="m-auto rounded-xl h-[20rem] w-[20rem] sm:h-[128px] sm:w-[128px]"
                   />
                 </div>
                 <div className="flex items-center">
@@ -88,13 +116,13 @@ const PlaceOrder = () => {
           </div>
         </div>
       </section>
-      <section>
-        <div>
+      <section className="flex justify-center items-center lg:w-auto">
+        <div className="">
           <div className="mb-5 font-bold text-xl">
             <h1>Shipping Address</h1>
           </div>
 
-          <form action="" className="space-y-6">
+          <div action="" className="space-y-6">
             <div className="flex flex-col ">
               <label htmlFor="email" className="font-medium">
                 Address
@@ -105,8 +133,9 @@ const PlaceOrder = () => {
                 id="address"
                 className="border-1 px-3 py-1 rounded-md w-80"
                 placeholder="address"
+                value={address}
                 onChange={(input) => {
-                  setEmail(input.target.value);
+                  setAddress(input.target.value);
                 }}
               />
             </div>
@@ -120,8 +149,9 @@ const PlaceOrder = () => {
                 id="city"
                 className="border-1 px-3 py-1 rounded-md w-80"
                 placeholder="city"
+                value={city}
                 onChange={(input) => {
-                  setEmail(input.target.value);
+                  setCity(input.target.value);
                 }}
               />
             </div>
@@ -135,8 +165,9 @@ const PlaceOrder = () => {
                 id="postalcode"
                 className="border-1 px-3 py-1 rounded-md w-80"
                 placeholder="postalcode"
+                value={postalCode}
                 onChange={(input) => {
-                  setEmail(input.target.value);
+                  setpostalCode(input.target.value);
                 }}
               />
             </div>
@@ -150,20 +181,22 @@ const PlaceOrder = () => {
                 id="country"
                 className="border-1 px-3 py-1 rounded-md w-80"
                 placeholder="country"
+                value={country}
                 onChange={(input) => {
-                  setEmail(input.target.value);
+                  setCountry(input.target.value);
                 }}
               />
             </div>
             <div className="">
               <button
                 type="submit"
-                className="border-1 px-4 py-1 rounded-lg bg-blue-600 text-white w-80"
+                className="border-1 px-4 py-2 rounded-lg bg-blue-600 text-white w-80"
+                onClick={saveShippingAddress}
               >
                 Save Shipping Address
               </button>
             </div>
-          </form>
+          </div>
         </div>
       </section>
     </article>
