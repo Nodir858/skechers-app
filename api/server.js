@@ -13,12 +13,13 @@ app.use(express.json());
 //allow all origins by default
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: ["http://localhost:5173", "http://localhost:8000"],
+    credentials: true,
   })
 );
 //connect db
 mongoose
-  .connect(process.env.MONGODB_URL)
+  .connect(process.env.MONGO_URI)
   .then(() => console.log("database connected"))
   .catch((error) => {
     console.error("MongoDB connection error:", error);
@@ -34,7 +35,7 @@ app.use("/", (req, res) => {
   res.send("Hello World");
 });
 
-PORT = 8000;
+const PORT = 8000;
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
 });

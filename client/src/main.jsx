@@ -16,3 +16,8 @@ createRoot(document.getElementById("root")).render(
     </Provider>
   </BrowserRouter>
 );
+
+// "dev": "vite",
+//     "build": "vite build",
+//     "lint": "eslint .",
+//     "preview": "vite preview"
