@@ -13,7 +13,11 @@ app.use(express.json());
 //allow all origins by default
 app.use(
   cors({
-    origin: ["http://localhost:5173", "http://localhost:8000"],
+    origin: [
+      "http://localhost:5173",
+      "http://localhost:8000",
+      "https://skechers-app-2.onrender.com",
+    ],
     credentials: true,
   })
 );
